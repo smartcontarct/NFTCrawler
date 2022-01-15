@@ -99,11 +99,12 @@ class MainPage extends Component {
             <div>
                 <div class="jumbotron">
                     <h2> NFT Crawler </h2>
+                    <br></br>
                 </div>
-                <div class="row row-content">
-			<div class="col-md-6">
-				  <Alert variant={this.state.connectedAddressStatus}>{this.state.connectedAddress}</Alert>
-			  </div> 
+        <div class="row row-content">
+			<div class="col-md-5">
+				<Alert variant={this.state.connectedAddressStatus}>{this.state.connectedAddress}</Alert>
+			</div> 
 		</div>
                 <Row>
                     <Col xs={12}>
