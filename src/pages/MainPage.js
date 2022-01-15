@@ -9,16 +9,18 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../App.css';
 import donate from '../donate.png';
-import { Row } from "react-bootstrap";
+import { Row,Alert } from "react-bootstrap";
 import NFTCard from '../Cards/NFTCard';
-
+import getWeb3 from "../utils/getWeb3";
 
 class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             AdminUser: false,
-            selectedAccoutnt: "0x0000000000000000000000000000000000000000",
+            web3:null,
+            connectedAddress: "Wallet Is Dissconnected!",
+            connectedAddressStatus:"warning",
             slectedChain: 'Ethereum',
             slectedChainId: 1,
             NFTs: []
@@ -29,13 +31,25 @@ class MainPage extends Component {
             { "1": "Ethereum" }, { "137": "Polygon" }
         ];
     }
-    componentDidMount() {
-        // setInterval(async () => {
-        //     const accounts = await window.ethereum.enable();
-        //     const account = accounts[0];
-        //     this.setState({ selectedAccoutnt: account });
-        // }, 1000)
-    }
+    componentDidMount  = async () => {
+    
+		try {
+		  
+		  // Get network provider and web3 instance.
+		  const web3 = await getWeb3();
+	
+		  // Use web3 to get the user's accounts.
+		  const accounts = await web3.eth.getAccounts();
+	
+		  this.setState({ connectedAddressStatus:"success",web3,connectedAddress:'Connected Address: '+accounts[0] ,account:accounts[0] });
+		} catch (error) {
+		  // Catch any errors for any of the above operations.
+		  alert(
+			`Failed to load web3, accounts, or contract. Check console for details.`,
+		  );
+		  console.error(error);
+		}
+	  };
 
     fetchData = async (t) => {
         let url = 'https://api.covalenthq.com/v1/' + this.state.slectedChainId + '/address/' + this.searchAddress.current.value + '/balances_v2/?nft=true&key=ckey_docs'
@@ -86,7 +100,11 @@ class MainPage extends Component {
                 <div class="jumbotron">
                     <h2> NFT Crawler </h2>
                 </div>
-                <h7>  MM Account: {this.state.selectedAccoutnt}  </h7>
+                <div class="row row-content">
+			<div class="col-md-6">
+				  <Alert variant={this.state.connectedAddressStatus}>{this.state.connectedAddress}</Alert>
+			  </div> 
+		</div>
                 <Row>
                     <Col xs={12}>
                         <Form className="d-flex">
