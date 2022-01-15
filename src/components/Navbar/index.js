@@ -15,13 +15,13 @@ return (
 		<Bars />
 
 		<NavMenu>
-		<NavLink to='/' activeStyle>
+		<NavLink to='/'>
 			Home
 		</NavLink>
-		<NavLink to='/marketplace' activeStyle>
+		<NavLink to='/marketplace'>
 			Marketplace
 		</NavLink>
-		<NavLink to='/about' activeStyle>
+		<NavLink to='/about'>
 			About
 		</NavLink>
 		{/* Second Nav */}
