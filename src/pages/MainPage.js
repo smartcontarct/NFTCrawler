@@ -52,6 +52,7 @@ class MainPage extends Component {
 	  };
 
     fetchData = async (t) => {
+       
         let url = 'https://api.covalenthq.com/v1/' + this.state.slectedChainId + '/address/' + this.searchAddress.current.value + '/balances_v2/?nft=true&key=ckey_docs'
         fetch(url).then(res => res.json()).then(
             result => {
@@ -61,7 +62,6 @@ class MainPage extends Component {
                 this.setState({ NFTs: NFTRes });
             }
         )
-
     };
     setChain = async (e) => {
         console.log(e);
@@ -106,46 +106,46 @@ class MainPage extends Component {
 				<Alert variant={this.state.connectedAddressStatus}>{this.state.connectedAddress}</Alert>
 			</div> 
 		</div>
-                <Row>
-                    <Col xs={12}>
-                        <Form className="d-flex">
-                            <FormControl
-                                ref={this.searchAddress}
-                                type="searchAddress"
-                                placeholder="Address"
-                                className="me-2"
-                                aria-label="searchAddress"
-                            />
-                            {/* <FormControl
-                                ref={this.Chain}
-                                type="Chain"
-                                placeholder="Chain"
-                                className="me-2"
-                                aria-label="Chain"
-                            /> */}
-                            <InputGroup className="mb-3">
-                                <DropdownButton
-                                    variant="outline-secondary"
-                                    title="Chain"
-                                    id="input-group-dropdown"
-                                    onSelect={this.setChain}
-                                >
-                                    <Dropdown.Item eventKey="1">Ethereum</Dropdown.Item>
-                                    <Dropdown.Item eventKey="137">Polygon</Dropdown.Item>
-                                    <Dropdown.Item eventKey="97">Binance Smart Chain</Dropdown.Item>
-                                    <Dropdown.Item eventKey="43114">Avalanche</Dropdown.Item>
-                                </DropdownButton>
-                                <FormControl aria-label="Text input with dropdown button" value={this.state.slectedChain} />
-                            </InputGroup>
-                            <Button variant="outline-success" onClick={this.fetchData}>Search</Button>
-                        </Form>
-                        {/* <CardDeck tyle={{ display: 'flex', flexDirection: 'row' }}>
+        <Form >
+            <Form.Group as={Row} className="mb-3" controlId="formKB9Response">
+                <Form.Label column sm="2">
+                    Input Address:
+                </Form.Label>
+                <Col sm="5">
+                    <Form.Control type="searchAddress" placeholder="Address" ref={this.searchAddress} />
+                </Col>
+            </Form.Group>
+            <br></br>
+            <Form.Group as={Row} className="mb-3" controlId="formKB9Response">
+                <Form.Label column sm="2">
+                    Select Chain:
+                </Form.Label>
+                <Col sm="3">
+                <Dropdown  onSelect={this.setChain}>
+                    <Dropdown.Toggle variant="success" id="dropdown-chain">
+                        {this.state.slectedChain}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item eventKey="1">Ethereum</Dropdown.Item>
+                        <Dropdown.Item eventKey="137">Polygon</Dropdown.Item>
+                        <Dropdown.Item eventKey="97">Binance Smart Chain</Dropdown.Item>
+                        <Dropdown.Item eventKey="43114">Avalanche</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                </Col>
+            </Form.Group>
+            <Button variant="primary" type="submit" onClick={this.fetchData}>
+		        Search
+	        </Button>
+        </Form>
+                           {/* <CardDeck tyle={{ display: 'flex', flexDirection: 'row' }}>
                             {NFTCards}
                         </CardDeck > */}
                         {this.state.NFTs.map((NFT, index) => (
                             <NFTCard NFT={NFT} id={index} />))}
-                    </Col>
-                </Row>
+                    
+                
             </div>
         )
     }
