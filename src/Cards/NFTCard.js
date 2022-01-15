@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
+import NFTCardData from '../Cards/NFTCardData';
 import Button from 'react-bootstrap/Button';
-//import Modal from 'react-bootstrap/Modal';
+import Modal from 'react-bootstrap/Modal';
 import '../App.css';
 
 
@@ -9,10 +10,15 @@ class NFTCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            nftPopup: false
         };
     }
-    
+    handleClose = () => {
+        this.setState({ nftPopup: false });
+    }
+    viewNFTCollection = () => {
+        this.setState({ nftPopup: true });
+    }
     render() {
 
         return (
@@ -38,7 +44,23 @@ class NFTCard extends Component {
                                  
                             </Card.Body>
                         </Card>
-
+                        <Modal show={this.state.nftPopup} onHide={this.handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>NFTs</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body><div class="card shadow mb-4">
+                                <div class="form-row">
+                                {this.props.NFT.nft_data.map((NFT, index) => (
+                            <NFTCardData NFT={NFT} id={index} />))}
+                                </div>
+                            </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={this.handleClose} disabled={false}>
+                                    Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                     </div>
                 </div>
             </div>
