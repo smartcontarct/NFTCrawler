@@ -26,21 +26,21 @@ class NFTCardData extends Component {
                 <div class="col xs = {3}" key={this.props.index}>
                     <div class="container" >
                         <Card style={{ flex: 1 }} >
-                        <div id="yourContainer">
-                                <Card.Img variant="top" src={this.props.NFT.external_data.image} alt="" />
+                            <div id="yourContainer">
+                                <Card.Img variant="top" src={this.props.NFT.external_data.image} alt="No Image" />
                             </div>
                             <Card.Body>
 
                                 <Card.Text>
-                                token_id: {this.props.NFT.token_id}</Card.Text>
+                                    token_id: {this.props.NFT.token_id}</Card.Text>
                                 <Card.Text>
-                                token_url: {this.props.NFT.token_url}</Card.Text>
-
-                                <Button variant="secondary" onClick={this.viewNFTCollection}>View NFTs</Button>
-                                 
+                                    token_url: {this.props.NFT.token_url}</Card.Text>
+                                <Card.Text>
+                                    description:{'  ' + this.props.NFT.external_data.description}
+                                </Card.Text>
                             </Card.Body>
                         </Card>
-                       
+
                     </div>
                 </div>
             </div>

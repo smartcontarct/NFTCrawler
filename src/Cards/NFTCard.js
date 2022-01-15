@@ -46,12 +46,12 @@ class NFTCard extends Component {
                         </Card>
                         <Modal show={this.state.nftPopup} onHide={this.handleClose}>
                             <Modal.Header closeButton>
-                                <Modal.Title>NFTs</Modal.Title>
+                                <Modal.Title>{this.props.NFT.contract_name}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body><div class="card shadow mb-4">
                                 <div class="form-row">
                                 {this.props.NFT.nft_data.map((NFT, index) => (
-                            <NFTCardData NFT={NFT} id={index} />))}
+                            <NFTCardData NFT={NFT} id={index}contract_name={this.props.NFT.contract_name} />))}
                                 </div>
                             </div>
                             </Modal.Body>
