@@ -39,13 +39,13 @@ class Marketplace extends Component{
     render() {
         return (
             <div>
-                <div class="jumbotron">
+                <div className="jumbotron">
                     <h2> NFT Marketplace  </h2>
                     <br></br>
                 </div>
                 <h5>Supported Markets:</h5>
-                <div class="row row-content">
-			        <div class="col-md-5">
+                <div className="row row-content">
+			        <div className="col-md-5">
 				        <Alert variant='info'>{this.state.supportedMarkets}</Alert>
 			        </div> 
 		        </div>
