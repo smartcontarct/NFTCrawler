@@ -4,18 +4,30 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import history from '../utils/history';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../App.css';
 import donate from '../donate.png';
 import { Row } from "react-bootstrap";
+import NFTCard from '../Cards/NFTCard';
+
 
 class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             AdminUser: false,
-            selectedAccoutnt: "0x0000000000000000000000000000000000000000"
+            selectedAccoutnt: "0x0000000000000000000000000000000000000000",
+            slectedChain: 'Ethereum',
+            slectedChainId: 1,
+            NFTs: []
         };
+        this.searchAddress = React.createRef();
+
+        this.chains = [
+            { "1": "Ethereum" }, { "137": "Polygon" }
+        ];
     }
     componentDidMount() {
         // setInterval(async () => {
@@ -25,38 +37,94 @@ class MainPage extends Component {
         // }, 1000)
     }
 
+    fetchData = async (t) => {
+        let url = 'https://api.covalenthq.com/v1/' + this.state.slectedChainId + '/address/' + this.searchAddress.current.value + '/balances_v2/?nft=true&key=ckey_docs'
+        fetch(url).then(res => res.json()).then(
+            result => {
+                console.log(result.data.items);
+                let NFTRes = result.data.items.filter(item=>item.nft_data != null)
+                console.log(NFTRes);
+                this.setState({ NFTs: NFTRes });
+            }
+        )
+
+    };
+    setChain = async (e) => {
+        console.log(e);
+        this.setState({ slectedChainId: e });
+        switch (e) {
+            case '1':
+                console.log(e);
+                this.setState({ slectedChain: "Ethereum" });
+                break;
+            case '137':
+                console.log(e);
+                this.setState({ slectedChain: "Polygon" });
+                break;
+            case '97':
+                console.log(e);
+                this.setState({ slectedChain: "Binance Smart Chain" });
+                break;
+            case '43114':
+                console.log(e);
+                this.setState({ slectedChain: "Avalanche" });
+                break;
+        }
+        console.log(this.slectedChain);
+    };
     render() {
+        let NFTCards;
+        NFTCards = this.state.NFTs.map((NFT, index) => {
+            if (NFT.type == 'NFT') {
+                return (<Col xs={3}>
+                    <NFTCard NFT={NFT} id={index} />
+                </Col>)
+            }
+        });
         return (
             <div>
                 <div class="jumbotron">
-                    <h2> NFT Crawler Dashboard </h2>
+                    <h2> NFT Crawler </h2>
                 </div>
                 <h7>  MM Account: {this.state.selectedAccoutnt}  </h7>
                 <Row>
-                    <Col xs={9}>
+                    <Col xs={12}>
                         <Form className="d-flex">
                             <FormControl
+                                ref={this.searchAddress}
                                 type="searchAddress"
                                 placeholder="Address"
                                 className="me-2"
                                 aria-label="searchAddress"
                             />
-                            <FormControl
+                            {/* <FormControl
+                                ref={this.Chain}
                                 type="Chain"
                                 placeholder="Chain"
                                 className="me-2"
                                 aria-label="Chain"
-                            />
-                            <Button variant="outline-success">Search</Button>
+                            /> */}
+                            <InputGroup className="mb-3">
+                                <DropdownButton
+                                    variant="outline-secondary"
+                                    title="Chain"
+                                    id="input-group-dropdown"
+                                    onSelect={this.setChain}
+                                >
+                                    <Dropdown.Item eventKey="1">Ethereum</Dropdown.Item>
+                                    <Dropdown.Item eventKey="137">Polygon</Dropdown.Item>
+                                    <Dropdown.Item eventKey="97">Binance Smart Chain</Dropdown.Item>
+                                    <Dropdown.Item eventKey="43114">Avalanche</Dropdown.Item>
+                                </DropdownButton>
+                                <FormControl aria-label="Text input with dropdown button" value={this.state.slectedChain} />
+                            </InputGroup>
+                            <Button variant="outline-success" onClick={this.fetchData}>Search</Button>
                         </Form>
-                    </Col>
-                    <Col xs={3}>
-                        <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <Image src={donate} thumbnail />
-
-                            </div>
-                        </div>
+                        {/* <CardDeck tyle={{ display: 'flex', flexDirection: 'row' }}>
+                            {NFTCards}
+                        </CardDeck > */}
+                        {this.state.NFTs.map((NFT, index) => (
+                            <NFTCard NFT={NFT} id={index} />))}
                     </Col>
                 </Row>
             </div>
