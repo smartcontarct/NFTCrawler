@@ -52,7 +52,7 @@ class MainPage extends Component {
 	  };
 
     fetchData = async (t) => {
-       
+        t.preventDefault();
         let url = 'https://api.covalenthq.com/v1/' + this.state.slectedChainId + '/address/' + this.searchAddress.current.value + '/balances_v2/?nft=true&key=ckey_docs'
         fetch(url).then(res => res.json()).then(
             result => {
