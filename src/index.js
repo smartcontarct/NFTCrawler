@@ -10,7 +10,7 @@ import Routes from './Routes';
 ReactDOM.render(
   <Router>
     <div className="App">
-      <App/>
+      <Routes />
     </div>
   </Router>,
   // <React.StrictMode>
