@@ -97,12 +97,12 @@ class MainPage extends Component {
         });
         return (
             <div>
-                <div class="jumbotron">
+                <div className="jumbotron">
                     <h2> NFT Crawler </h2>
                     <br></br>
                 </div>
-        <div class="row row-content">
-			<div class="col-md-5">
+        <div className="row row-content">
+			<div className="col-md-5">
 				<Alert variant={this.state.connectedAddressStatus}>{this.state.connectedAddress}</Alert>
 			</div> 
 		</div>
