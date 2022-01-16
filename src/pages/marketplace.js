@@ -9,6 +9,7 @@ class Marketplace extends Component{
         this.state = {
             selectedChain: 'Ethereum',
             selectedChainId: 1,
+            selectedPeriod:'1 Year',
             supportedMarkets:'OpenSea, Rarible, Foundation, Refinable, NFTrade, LooksRare',
             Collections: []
         };
@@ -23,10 +24,44 @@ class Marketplace extends Component{
         }
         return etherValue;
     }
+    FormatDate=(date) =>{
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+    
+        return [year, month, day].join('-');
+    }
     fetchData = async (t) => {
         t.preventDefault();
+        let from;
+        let to;
+    if(this.state.selectedPeriod=="1 Year"){
+        let start=new Date();
+        from=this.FormatDate(start);
+        let endms=start.getTime()+(1000 * 60 * 60 * 24*365);
+        let end=new Date(endms);
+        to=this.FormatDate(end);
+    }else if(this.state.selectedPeriod=="24 Hour"){
+        let start=new Date();
+        from=this.FormatDate(start);
+        let endms=start.getTime()+(1000 * 60 * 60 * 24);
+        let end=new Date(endms);
+        to=this.FormatDate(end);
+    }
+            let start=new Date();
 
-       
+            console.log(this.FormatDate(start));
+            console.log("start:"+start.getUTCMilliseconds())
+            let endms=start.getTime()+(1000 * 60 * 60 * 24);
+            let end=new Date(endms);
+            console.log(start);
+            console.log(end);
             let url  ='https://api.covalenthq.com/v1/'+  this.state.slectedChainId +'/nft_market/?key=ckey_docs'
             fetch('https://api.covalenthq.com/v1/1/nft_market/?key=ckey_docs').then(res => res.json()).then(
                 result => {
@@ -68,6 +103,29 @@ class Marketplace extends Component{
         }
         console.log(this.selectedChain);
     };
+    setPeriod = async (e) => {
+        console.log(e);
+        this.setState({ selectedPeriod: e });
+        switch (e) {
+            case '1':
+                console.log(e);
+                this.setState({ selectedPeriod: "1 Year"});
+                break;
+            case '2':
+                console.log(e);
+                this.setState({ selectedPeriod: "1 Month"});
+                break;
+            case '3':
+                console.log(e);
+                this.setState({ selectedPeriod: "7 Day" });
+                break;
+            case '4':
+                console.log(e);
+                this.setState({ selectedPeriod: "24 Hour" });
+                break;
+        }
+        console.log(this.selectedPeriod);
+    };
     render() {
         return (
             <div>
@@ -106,6 +164,27 @@ class Marketplace extends Component{
                         <Dropdown.Item eventKey="137">Polygon</Dropdown.Item>
                         <Dropdown.Item eventKey="97">Binance Smart Chain</Dropdown.Item>
                         <Dropdown.Item eventKey="43114">Avalanche</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formKB9Response">
+                <Form.Label column sm="2">
+                    Choose Period:
+                </Form.Label>
+                <Col sm="3">
+                <Dropdown  onSelect={this.setPeriod}>
+                    <Dropdown.Toggle variant="success" id="dropdown-chain">
+                        {this.state.selectedPeriod}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item eventKey="1">1 Year</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">1 Month</Dropdown.Item>
+                        <Dropdown.Item eventKey="3">7 Day</Dropdown.Item>
+                        <Dropdown.Item eventKey="4">24 Hour</Dropdown.Item>
+                       
+                       
                     </Dropdown.Menu>
                 </Dropdown>
                 </Col>
