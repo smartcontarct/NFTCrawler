@@ -10,7 +10,7 @@ class About extends Component{
 
     render() {
         return (
-                <div class="jumbotron">
+                <div className="jumbotron">
                     <h2> About NFTCrawler Project </h2>
                     <br></br>
                 </div>
