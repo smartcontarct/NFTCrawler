@@ -24,34 +24,34 @@ class NFTCard extends Component {
         return (
             <div>
                 <br></br>
-                <div class="col xs = {3}" key={this.props.index}>
-                    <div class="container" >
+                <div className="col xs = {3}" key={this.props.id}>
+                    <div className="container" >
                         <Card style={{ flex: 1 }} >
+                            <Card.Title>
+                                contract name: {this.props.NFT.contract_name}
+                            </Card.Title>
                             <Card.Body>
-
                                 <Card.Text>
-                                contract name: {this.props.NFT.contract_name}</Card.Text>
+                                    contract_address: {this.props.NFT.contract_address}</Card.Text>
                                 <Card.Text>
-                                contract_address: {this.props.NFT.contract_address}</Card.Text>
-                                <Card.Text>
-                                last_transferred_at: {this.props.NFT.last_transferred_at}</Card.Text>
+                                    last_transferred_at: {this.props.NFT.last_transferred_at}</Card.Text>
                                 <Card.Text>nft count: {this.props.NFT.nft_data.length}</Card.Text>
                                 {/* <Card.Text>
                                     active: {this.props.asset[5]}</Card.Text> */}
 
 
                                 <Button variant="secondary" onClick={this.viewNFTCollection}>View NFTs</Button>
-                                 
+
                             </Card.Body>
                         </Card>
                         <Modal show={this.state.nftPopup} onHide={this.handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>{this.props.NFT.contract_name}</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body><div class="card shadow mb-4">
-                                <div class="form-row">
-                                {this.props.NFT.nft_data.map((NFT, index) => (
-                            <NFTCardData NFT={NFT} id={index}contract_name={this.props.NFT.contract_name} />))}
+                            <Modal.Body><div className="card shadow mb-4">
+                                <div className="form-row">
+                                    {this.props.NFT.nft_data.map((NFT, index) => (
+                                        <NFTCardData NFT={NFT} id={index} key={index} contract_name={this.props.NFT.contract_name}contract_address={this.props.NFT.contract_address} chainId={this.props.chainId}/>))}
                                 </div>
                             </div>
                             </Modal.Body>

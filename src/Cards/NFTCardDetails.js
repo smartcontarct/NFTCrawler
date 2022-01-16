@@ -7,7 +7,7 @@ import history from '../utils/history';
 
 
 
-class NFTCardData extends Component {
+class NFTCardDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,19 +39,17 @@ class NFTCardData extends Component {
 
                                 <Card.Text>
                                     token_id: {this.props.NFT.token_id}</Card.Text>
-                                {/* <Card.Text>
+                                <Card.Text>
+                                    <Card.Text>
+                                        Price: {this.weiToEther(this.props.NFT.token_price_wei)} ether
+                                </Card.Text>
                                     token_url: {this.props.NFT.token_url}</Card.Text>
                                 <Card.Text>
                                     description:{'  ' + this.props.NFT.external_data.description}
-                                </Card.Text> */}
-                                <Card.Text>
-                                    Price: {this.weiToEther(this.props.NFT.token_price_wei)} ether
                                 </Card.Text>
 
+
                             </Card.Body>
-                            <Button variant="primary" onClick={() => history.push({pathname:'/NFTDetails',NFT: this.props.NFT,contract_address:this.props.contract_address, chainId:this.props.chainId})} disabled={false}>
-                                    Details
-                            </Button>
                         </Card>
 
                     </div>
@@ -61,4 +59,4 @@ class NFTCardData extends Component {
     }
 }
 
-export default NFTCardData;
+export default NFTCardDetails;

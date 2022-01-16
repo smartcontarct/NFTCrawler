@@ -4,6 +4,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import history from './utils/history';
 // import About from "./pages/About";
 import Home from "./pages/MainPage";
+import NFTDetails from "./pages/NFTDetails";
 import Marketplace from "./pages/marketplace";
 import About from "./pages/about";
 import Navbar from './components/Navbar';
@@ -26,6 +27,7 @@ export default class Routes extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/marketplace" exact component={Marketplace} />
                     <Route path="/about" exact component={About} />
+                    <Route path="/NFTDetails" exact component={NFTDetails} />
                      {/* <Route path="/ServiceAdminPage" component={ServiceAdminPage} />
                      <Route path="/ManageService" component={ManageService} />
                      <Route path="/ServeiceReceivers" component={ServeiceReceivers} />
