@@ -1,6 +1,6 @@
 # NFTCrawler
 <div style="text-align:center"><img src="https://github.com/smartcontarct/NFTCrawler/blob/main/public/nftcrawler.jpg" /></div>
-Create an online NFT Crawler that makes possible to retrive NFT information on blockchains. User can enter address and choose chain in order to see ntf list on selected blockchain.
+Create an online NFT Crawler that makes possible to retrive NFT information on blockchains. User can enter see ntf information on selected blockchain.
 
 # Represented Data
 - Get a chain id and address and return current token balances along with their spot prices. We filtered NFT tokens.
