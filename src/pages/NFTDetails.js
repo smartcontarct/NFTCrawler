@@ -34,7 +34,7 @@ class NFTDetails extends Component {
                         <NFTCardDetails NFT={this.props.location.NFT} id={1} key={1} />
                     </Col>
                     <Col sm = "7">
-                        <NFTCardDetails NFT={this.props.location.NFT} id={1} key={1} />
+                        {/* <NFTCardDetails NFT={this.props.location.NFT} id={1} key={1} /> */}
                     </Col>
                 </Row>
             </div>
