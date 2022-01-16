@@ -24,6 +24,11 @@ return (
 		<NavLink to='/about'>
 			About
 		</NavLink>
+	
+		<NavLink to='/mint'>
+			Mint
+		</NavLink>
+	
 		{/* Second Nav */}
 		{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
 		</NavMenu>
