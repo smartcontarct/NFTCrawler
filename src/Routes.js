@@ -9,13 +9,13 @@ import Marketplace from "./pages/marketplace";
 import About from "./pages/about";
 import Mint from "./pages/mint";
 import Navbar from './components/Navbar';
+import MarketPlaceDetail from './pages/marketPlaceDetail';
 // import ServiceAdminPage from "./pages/ServiceAdminPage";
 // import ManageService from "./pages/ManageService";
 // import ServeiceReceivers from "./pages/ServeiceReceivers";
 // import UserPage from "./pages/UserPage"
 // import PolicyManagement from "./pages/PolicyManagement";
 // import AddPolicy from "./pages/AddPolicy";
-
 // import AdminPage from "./pages/AdminPage";
 
 
@@ -30,6 +30,7 @@ export default class Routes extends Component {
                     <Route path="/mint" exact component={Mint} />
                     <Route path="/about" exact component={About} />
                     <Route path="/NFTDetails" exact component={NFTDetails} />
+                    <Route path="/MarketPlaceDetail" exact component={MarketPlaceDetail} />
                      {/* <Route path="/ServiceAdminPage" component={ServiceAdminPage} />
                      <Route path="/ManageService" component={ManageService} />
                      <Route path="/ServeiceReceivers" component={ServeiceReceivers} />
