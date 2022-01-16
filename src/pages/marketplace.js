@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Row,Form,Dropdown,Button, Col, Alert} from "react-bootstrap";
+import {Row,Form,Dropdown,Button, Col, Alert,Table} from "react-bootstrap";
+import web3 from "../utils/web3";
 
 class Marketplace extends Component{
     constructor(props) {
@@ -9,10 +10,48 @@ class Marketplace extends Component{
             selectedChain: 'Ethereum',
             selectedChainId: 1,
             supportedMarkets:'OpenSea, Rarible, Foundation, Refinable, NFTrade, LooksRare',
-            NFTs: []
+            Collections: []
         };
         this.collectionAddress = React.createRef();
     }
+    weiToEther = (t) => {
+        
+        var etherValue;
+        if (t != null) {
+            const s=parseInt(t);
+            etherValue = web3.utils.fromWei(s, 'ether');
+        }
+        return etherValue;
+    }
+    fetchData = async (t) => {
+        t.preventDefault();
+
+        if(this.collectionAddress.current.value.length==0)
+        {
+            let url  ='https://api.covalenthq.com/v1/'+  this.state.slectedChainId +'/nft_market/?key=ckey_docs'
+            fetch('https://api.covalenthq.com/v1/1/nft_market/?key=ckey_docs').then(res => res.json()).then(
+                result => {
+                    //console.log(result.data.items);
+                  //  let NFTRes = result.data.items.filter(item => item.nft_data != null)
+                    
+                    this.setState({ Collections: result.data.items });
+                    console.log(this.state.Collections);
+                }
+            )
+        }
+      /*  else{
+            console.log(this.collectionAddress.current.value);
+        let url = 'https://api.covalenthq.com/v1/' + this.state.slectedChainId + '/address/' + this.collectionAddress.current.value + '/balances_v2/?nft=true&key=ckey_docs'
+        fetch('https://api.covalenthq.com/v1/1/nft_market/collection/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/?key=ckey_docs').then(res => res.json()).then(
+            result => {
+                console.log(result.data.items);
+                let NFTRes = result.data.items.filter(item => item.nft_data != null)
+                console.log(NFTRes);
+                this.setState({ NFTs: NFTRes });
+            }
+        )
+        }*/
+    };
     setChain = async (e) => {
         console.log(e);
         this.setState({ selectedChainId: e });
@@ -82,6 +121,50 @@ class Marketplace extends Component{
 		        Search
 	        </Button>
         </Form>
+        <Table  striped bordered hover>
+			  	<thead>
+    				<tr>
+      					
+      					<th>Name</th>
+      					<th>Address</th>
+      					<th>AVG Volume(USD) /24h</th>
+                        <th>AVG Volume(ETH) /24h</th>
+                        <th>Floor Price(USD) /7d</th>
+                        <th>Floor Price(ETH) /7d</th>
+                        <th>Market Cap(USD)</th>
+                        <th>Market Cap(ETH)</th>
+                        <th>Max Price(USD)</th>
+                        <th>Max Price(ETH)</th>
+                        <th>Opening Date</th>
+                        <th>Tokens sold</th>
+                        <th>Volum(USD) /24h</th>
+                        <th>Volum(ETH) /24</th>
+    				</tr>
+  				</thead>
+				<tbody>
+					{this.state.Collections.map((item) => (
+						<tr> 
+						
+							<td>{item.collection_name}</td>
+							<td>{item.collection_address}</td>
+							<td>{item.avg_volume_quote_24h}</td>
+                            <td>{item.avg_volume_wei_24h}</td>
+                            <td>{item.floor_price_quote_7d}</td>
+                            <td>{item.floor_price_wei_7d}</td>
+                            <td>{item.market_cap_quote}</td>
+                            <td>{item.market_cap_wei}</td>
+                            <td>{item.max_price_quote}</td>
+                            <td>{item.max_price_wei}</td>
+                            <td>{item.opening_date}</td>
+                            <td>{item.unique_token_ids_sold_count_alltime}</td>
+                            <td>{item.volume_quote_24h}</td>
+                            <td>{item.volume_wei_24h}</td>
+						</tr>
+                
+                  	))}
+
+				</tbody>
+        </Table> 
             </div>
         );
     }
