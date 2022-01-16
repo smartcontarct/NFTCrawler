@@ -5,6 +5,31 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 class Mint extends Component {
+	
+	/*
+    
+    fetchData = async (t) => {
+        t.preventDefault();
+
+
+
+        fetch("https://api.nftport.xyz/v0/mints/easy/urls", {
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "9dd184c0-2c6f-46a0-ac99-bbf92cf18951"
+  },
+  "body": "{\"chain\":\"polygon\",\"name\":\"nftcrawler4\",\"description\":\"nftcrawler4\",\"file_url\":\"https://cdn-147.anonfiles.com/X4GaA7Bex4/2a3d0458-1642318471/nftc.jpg\",\"mint_to_address\":\"0x2bc3f35B61D96305F9e756Dc13125d95cD9d49cE\"}"
+})
+.then(response => {
+  console.log(response);
+  console.log(response.data.items);
+
+})
+.catch(err => {
+  console.error(err);
+});
+*/
   listAll = async (lnft) => {
     fetch('https://api.nftport.xyz/v0/me/mints?chain=polygon', {
       "method": "GET",
