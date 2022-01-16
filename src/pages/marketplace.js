@@ -26,31 +26,24 @@ class Marketplace extends Component{
     fetchData = async (t) => {
         t.preventDefault();
 
-        if(this.collectionAddress.current.value.length==0)
-        {
+       
             let url  ='https://api.covalenthq.com/v1/'+  this.state.slectedChainId +'/nft_market/?key=ckey_docs'
             fetch('https://api.covalenthq.com/v1/1/nft_market/?key=ckey_docs').then(res => res.json()).then(
                 result => {
-                    //console.log(result.data.items);
-                  //  let NFTRes = result.data.items.filter(item => item.nft_data != null)
-                    
-                    this.setState({ Collections: result.data.items });
+        
+                  if(this.collectionAddress.current.value.length==0)
+                  {
+                    let CollRes = result.data.items.filter(item => item.collection_name != null);
+                    this.setState({ Collections: CollRes });
+                  }
+                  else{
+                    let CollRes = result.data.items.filter(item => item.collection_address == this.collectionAddress.current.value);
+                    this.setState({ Collections: CollRes });
+                  }
                     console.log(this.state.Collections);
                 }
             )
-        }
-      /*  else{
-            console.log(this.collectionAddress.current.value);
-        let url = 'https://api.covalenthq.com/v1/' + this.state.slectedChainId + '/address/' + this.collectionAddress.current.value + '/balances_v2/?nft=true&key=ckey_docs'
-        fetch('https://api.covalenthq.com/v1/1/nft_market/collection/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/?key=ckey_docs').then(res => res.json()).then(
-            result => {
-                console.log(result.data.items);
-                let NFTRes = result.data.items.filter(item => item.nft_data != null)
-                console.log(NFTRes);
-                this.setState({ NFTs: NFTRes });
-            }
-        )
-        }*/
+        
     };
     setChain = async (e) => {
         console.log(e);
