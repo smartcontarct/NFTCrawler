@@ -8,14 +8,10 @@ Create an online NFT Crawler that makes possible to retrive NFT information on b
 - Get a chain return a detailed view of the specified collection address and their time series data in day granularity.
 
 # Chains
-Ethereum: OpenSea, Rarible, Foundation, Refinable, NFTrade, LooksRare
-Polygon: OpenSea, Refinable, NFTrade
-Binance Smart Chain: Refinable, NFTrade
-Avalanche: NFTrade
-
-# Markets
-OpenSea, Rarible, Foundation, Refinable, NFTrade, LooksRare
+- Ethereum: MarketPlace= OpenSea, Rarible, Foundation, Refinable, NFTrade, LooksRare
+- Polygon: MarketPlace= OpenSea, Refinable, NFTrade
+- Binance Smart Chain: MarketPlace= Refinable, NFTrade
+- Avalanche: NFTrade
 
 ## Instructions
-
 required: [Node](https://nodejs.org/dist/latest-v12.x/), [Yarn](https://classic.yarnpkg.com/en/docs/install/) and [Git](https://git-scm.com/downloads)
