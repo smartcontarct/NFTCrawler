@@ -7,6 +7,7 @@ import Home from "./pages/MainPage";
 import NFTDetails from "./pages/NFTDetails";
 import Marketplace from "./pages/marketplace";
 import About from "./pages/about";
+import Mint from "./pages/mint";
 import Navbar from './components/Navbar';
 // import ServiceAdminPage from "./pages/ServiceAdminPage";
 // import ManageService from "./pages/ManageService";
@@ -26,6 +27,7 @@ export default class Routes extends Component {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/marketplace" exact component={Marketplace} />
+                    <Route path="/mint" exact component={Mint} />
                     <Route path="/about" exact component={About} />
                     <Route path="/NFTDetails" exact component={NFTDetails} />
                      {/* <Route path="/ServiceAdminPage" component={ServiceAdminPage} />
