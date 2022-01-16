@@ -17,3 +17,10 @@ Create an online NFT Crawler that makes possible to retrive NFT information on b
 required: [Node](https://nodejs.org/dist/latest-v12.x/), [Yarn](https://classic.yarnpkg.com/en/docs/install/) and [Git](https://git-scm.com/downloads)
 
 This should open up the browser to `https://black-leaf-3391.on.fleek.co/` which you can interact with the UI. 
+
+```bash
+
+yarn start
+
+```
+This should open up the browser to `http://localhost:3000/` which you can interact with an MVP UI. 
